@@ -1,0 +1,44 @@
+<%- include("partials/header.ejs") %>
+<style>
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    display: inline-block; 
+    max-width: 100%; 
+    word-wrap: break-word; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  h3 {
+    margin: 0 0 10px 0; 
+  }
+
+  p {
+    margin: 0; 
+  }
+</style>
+<h1>Welcome to the Blog Sphere</h1>
+
+  <% if (posts.length === 0) { %>
+    <p>No posts available. Create one now!</p>
+  <% } else { %>
+    <% posts.forEach((post,index) => { %>
+      <div class="card">
+        <h3><%= post.title %></h3>
+        <p><%= post.content %></p>
+        
+        <form action="/delete" method="POST">
+          <input type="hidden" name="index" value="<%= index %>">
+          <button type="submit">Delete</button>
+        </form>
+      </div>
+    <% }) %>
+  <% } %>
+
+  <br>
+  
+  
+
+<%- include("partials/footer.ejs") %>
